@@ -4,7 +4,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import "./AgGridStyles.scss";
-import { ColumnDefs, DefaultColumnDefs, RowData } from "./AgGridTableProps";
+import { ColumnDefs, DefaultColumnDefs, RowData, ChannelRender, createShowCellRenderer } from "./AgGridTableProps";
 
 export const AgGridTable = () => {
   const gridRef = useRef();
@@ -45,6 +45,12 @@ export const AgGridTable = () => {
         // rowSelection="multiple"
         onFirstDataRendered={onFirstDataRendered}
         suppressRowTransform={true}
+        // components={{ showCellRenderer: ChannelRender() }}
+        getRowHeight={ (params) => {
+          const {channel} = params.data;
+          console.log("height", channel.length * 40)
+          return channel.length * 40;
+        }}
       ></AgGridReact>
     </div>
   );
