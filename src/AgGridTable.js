@@ -32,7 +32,11 @@ export const AgGridTable = () => {
       node.setSelected(selectedRows.includes(node.data.id))
     );
   };
-
+  let uniq = {}
+  rowData.forEach(obj => {
+    !uniq[obj.skuNumber] ? uniq[obj.skuNumber] = true : delete obj.skuNumber;
+})
+console.log(rowData)
   return (
     <div className="ag-theme-alpine" style={{ height: 400, width: 800 }}>
       <AgGridReact

@@ -14,6 +14,18 @@ const AddSupplier = (params) => {
   );
 };
 
+const rowSpan = (params) => {
+  const nodeApi = params.api;
+  const skuNumber = params.data.skuNumber;
+  const gridData = RowData
+  // nodeApi.forEachNode((rowNode, index) => {
+  //   console.log(rowNode)
+  //   gridData.push(rowNode.data)
+  // });
+  console.log("span", gridData.filter((e) => e.skuNumber === 1000001).length); // getData() with return the original rowData array.
+  return gridData.filter((e) => e.skuNumber === 1000001).length;
+}
+
 export const ChannelRender = (params) => {
   // console.log(params);
   const {channel} = params.data;
@@ -55,11 +67,8 @@ export const ColumnDefs = [
     pinned: "left",
     checkboxSelection: true,
     headerCheckboxSelection: true,
-    rowSpan: (params) => {
-      const {channel} = params.data;
-      console.log("channel", channel.length)
-      return channel.length;
-    }
+    rowSpan: rowSpan,
+    cellClassRules: { 'show-cell': 'value !== undefined' }
     // cellRenderer: ShowCellRenderer,
   },
   {
@@ -93,17 +102,37 @@ export const RowData = [
     skuDescription: "Javara Veggie Noodle Basil and Garlic 200 gram",
     channel: [{
       code: "B2B"
-    }, {code: "B2C"}],
+    }],
     supplier: "Agus",
     category: "Carbs, Grains, Nuts"
   },
   {
     id: "a151edc7-c73e-468b-bef8-a26c43229a07",
+    skuNumber: 1000001,
+    skuDescription: "Javara Veggie Noodle Broccoli 200 gram",
+    channel: [{
+      code: "B2C"
+    }],
+    supplier: "Agus",
+    category: "Carbs, Grains, Nuts"
+  },
+  {
+    id: "a151edc7-c73e-468b-bef8-a26c43229a08",
+    skuNumber: 1000001,
+    skuDescription: "Javara Veggie Noodle Broccoli 200 gram",
+    channel: [{
+      code: "B2D"
+    }],
+    supplier: "Agus",
+    category: "Carbs, Grains, Nuts"
+  },
+  {
+    id: "a151edc7-c73e-468b-bef8-a26c43229a08",
     skuNumber: 1000002,
     skuDescription: "Javara Veggie Noodle Broccoli 200 gram",
     channel: [{
       code: "B2B"
-    }, {code: "B2C"}, {code: "BBB"}, {code: "B2D"}],
+    }],
     supplier: "Agus",
     category: "Carbs, Grains, Nuts"
   },
@@ -113,7 +142,7 @@ export const RowData = [
     skuDescription: "Javara Veggie Noodle Broccoli 200 gram",
     channel: [{
       code: "B2B"
-    }, {code: "B2C"}, {code: "BBB"}],
+    }],
     supplier: "Agus",
     category: "Carbs, Grains, Nuts"
   }
